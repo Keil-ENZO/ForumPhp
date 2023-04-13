@@ -1,0 +1,16 @@
+.btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: $colorPrincipal;
+    border: none;
+    color: $cards;
+    font-weight: 800;
+    font-family: 'Comfortaa', cursive;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+        background-color: $color;
+    }
+}

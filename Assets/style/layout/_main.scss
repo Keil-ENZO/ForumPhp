@@ -1,0 +1,141 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 5%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+}
+
+.share {
+  background-color: $cards;
+  max-width: 400px;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  padding: 20px;
+
+  .inputShare {
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+    background-color: $cards;
+    border: none;
+    margin-bottom: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.message {
+  width: 100%;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $cards;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 50px;
+    animation-name: animMessage;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timeline: ease-in-out;
+
+
+    .author {
+      text-align: center;
+      padding: 10px;
+      width: 40px;
+      border-radius: 100%;
+      background-color: $colorPrincipal;
+      color: $cards;
+      position: relative;
+      top: -30px;
+      left: 95%;
+    }
+
+    .date {
+      color: $colorPrincipal;
+      font-size: 13px;
+      position: relative;
+      top: 30px;
+      left: 55%;
+    }
+  }
+}
+
+@keyframes animMessage {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.menuTopic {
+  // position: sticky;
+  background-color: $cards;
+  height: 100%;
+  min-width: 150px;
+  padding: 20px;
+  margin-left: 5%;
+  border-radius: 15px;
+
+  li {
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .inputTopic {
+    width: 80%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: $background;
+    border: none;
+    padding: 10px;
+  }
+}
+
+.menuTag {
+  background-color: $cards;
+  height: 100%;
+  min-width: 150px;
+  padding: 20px;
+  margin-right: 5%;
+  border-radius: 15px;
+
+  li {
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .inputTag {
+    width: 80%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: $background;
+    border: none;
+    padding: 10px;
+  }
+}

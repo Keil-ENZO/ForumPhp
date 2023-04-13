@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'title';
+    src: "../../fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf";
+}
+
+@font-face {
+    font-family: 'text';
+    src: "../../fonts/Roboto/Roboto-VariableFont_wght.ttf";
+}
+
+$title: 'title', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$text: 'text',
+sans-serif;
+$colorPrincipal: #3E4454;
+$background: #E9E9E9;
+$cards: #FFFFFF;
+$color: #111;
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: $background;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 800;
+    color: $color;
+}
+
+p {
+    font-family: $text;
+    color: $color;
+}
+
+a {
+    text-decoration: none;
+    color: $color;
+    cursor: pointer;
+    font-family: $text;
+
+}
+
+ul {
+    list-style: none;
+}
+
+textarea {
+    resize: none;
+    font-family: $text;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.dark {
+    background: $colorPrincipal;
+    color: $cards;
+}
+
+.darkItem {
+    background: $colorPrincipal;
+    color: $colorPrincipal;
+    fill: $colorPrincipal;
+}
