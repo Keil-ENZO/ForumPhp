@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 
 session_start();
-
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = 'root';
@@ -10,14 +9,14 @@ $db_db = 'ForumPhp';
 $port = '8889';
 
 try {
-    $pdo = new PDO('mysql:host=' . $db_host . ';port=' . $port . ';dbname=' . $db_db, $db_user, $db_password);
+    $pdo = new PDO('mysql:host='.$db_host.';port='.$port.';dbname='.$db_db, $db_user, $db_password);
     $retour["success"] = true;
-    $retour["message"] = "Connexion à la base de reussite";
-} catch (PDOException $e) {
-    $retour["success"] = false;
-    $retour["message"] = "Erreur de connexion à la base de données";
-}
+	$retour["message"] = "Erreur de connexion à la base de reussite";
 
+} catch(PDOException $e) {
+	$retour["success"] = false;
+	$retour["message"] = "Erreur de connexion à la base de données";
+}
 if (!empty($_GET['pseudo']) && !empty($_GET['email']) && !empty($_GET['mdp'])) {
     // Vérifier si l'email et le pseudo existent déjà dans la base de données
     $checkUser = $pdo->prepare("SELECT * FROM `Users` WHERE `pseudo` = :pseudo OR `email` = :email;");
