@@ -19,37 +19,17 @@ try {
     $retour["message"] = "Erreur de connexion à la base de données";
 }
 
-header("Access-Control-Allow-Origin: *");
 
-$method = $_SERVER['REQUEST_METHOD'];
-
-$endpoint = isset($_GET['endpoint']) ? $_GET['endpoint'] : '';
-
-if ($method == 'GET') {
-    switch ($endpoint) {
-        case 'users':
-            $requete = $pdo->prepare("SELECT * FROM `Users`");
-            $requete->execute();
-
-            $result = $requete->fetchAll();
-
-            $retour["success"] = true;
-            $retour["message"] = "Voici les données";
-            $retour["Nb lignes"] = count($result);
-            $retour["results"] ["Personne"] = $result;
-
-            echo json_encode($retour);
-            break;
+$requete = $pdo->prepare("SELECT * FROM `Users`");
+$requete->execute();
 
 
+$result = $requete->fetchAll();
 
-        default:
-            http_response_code(404); 
-            echo json_encode(array("message" => "Endpoint non trouvé"));
-            break;
-    }
-} else {
-    http_response_code(405); 
-    echo json_encode(array("message" => "Méthode non autorisée"));
-}
-?>
+$retour["success"] = true;
+$retour["message"] = "Voici les données";
+$retour["Nb lignes"] = count($result);
+$retour["results"] ["Personne"] = $result;
+
+echo json_encode($retour);
+ 
