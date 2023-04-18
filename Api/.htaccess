@@ -1,3 +1,0 @@
-RewriteEngine on
-RewriteBase /ForumPhp/Api/
-RewriteRule ^users$ api.php?=users [L]

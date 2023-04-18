@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // message.innerHTML = data.message;
             document.getElementById("pseudo").value = "";
             document.getElementById("mdp").value = "";
-            window.location.href = "http://localhost:8888/ForumPhp/index.php";
+            window.location.href =
+              "http://localhost:8888/ForumPhp/pages/main.php";
           } else {
             // Erreur de connexion
             console.error(data.message);

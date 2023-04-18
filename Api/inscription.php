@@ -17,6 +17,7 @@ try {
 	$retour["success"] = false;
 	$retour["message"] = "Erreur de connexion à la base de données";
 }
+
 if (!empty($_GET['pseudo']) && !empty($_GET['email']) && !empty($_GET['mdp'])) {
     // Vérifier si l'email et le pseudo existent déjà dans la base de données
     $checkUser = $pdo->prepare("SELECT * FROM `Users` WHERE `pseudo` = :pseudo OR `email` = :email;");

@@ -3,7 +3,6 @@ const card = document.getElementById("message");
 const shareBtn = document.getElementById("shareBtn");
 
 
-
 // Fonction pour partager un message
 function partage() {
   const text = textArea.value;
@@ -11,50 +10,69 @@ function partage() {
   if (text === "") {
     return;
   } else {
-    let date = new Date();
-    let daysOfWeek = [
-      "Dimanche",
-      "Lundi",
-      "Mardi",
-      "Mercredi",
-      "Jeudi",
-      "Vendredi",
-      "Samedi",
-    ];
-    let dayOfWeek = daysOfWeek[date.getDay()];
-    let dayOfMonth = date.getDate();
-    let monthsOfYear = [
-      "janvier",
-      "février",
-      "mars",
-      "avril",
-      "mai",
-      "juin",
-      "juillet",
-      "août",
-      "septembre",
-      "octobre",
-      "novembre",
-      "décembre",
-    ];
-    let monthOfYear = monthsOfYear[date.getMonth()];
-    let year = date.getFullYear();
-    let hour = date.getHours().toString().padStart(2, "0");
-    let minute = date.getMinutes().toString().padStart(2, "0");
-    let dateNow = `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year} - ${hour}:${minute}`;
+    fetch(
+      "http://localhost:8888/ForumPhp/Api/partage.php?message=" +
+        encodeURIComponent(text)
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          let date = new Date();
+          let daysOfWeek = [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi",
+          ];
+          let dayOfWeek = daysOfWeek[date.getDay()];
+          let dayOfMonth = date.getDate();
+          let monthsOfYear = [
+            "janvier",
+            "février",
+            "mars",
+            "avril",
+            "mai",
+            "juin",
+            "juillet",
+            "août",
+            "septembre",
+            "octobre",
+            "novembre",
+            "décembre",
+          ];
+          let monthOfYear = monthsOfYear[date.getMonth()];
+          let year = date.getFullYear();
+          let hour = date.getHours().toString().padStart(2, "0");
+          let minute = date.getMinutes().toString().padStart(2, "0");
+          let dateNow = `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year} - ${hour}:${minute}`;
+          let pseudo = "<?php echo $_SESSION['pseudo']; ?>"; // récupération du pseudo depuis la session PHP
 
-    card.insertAdjacentHTML(
-      "afterbegin",
-      `
-    <div class="card">
-        <p class="author">E</p>
-        <p>${text}</p>
-        <p class="date">${dateNow}</p>
-    </div>
-    `
-    );
+          card.insertAdjacentHTML(
+            "afterbegin",
+            `
+            <div class="card">
+              <p class="author">${pseudo}</p>
+              <p>${text}</p>
+              <p class="date">${dateNow}</p>
+            </div>
+          `
+          );
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        alert("Une erreur est survenue : " + error);
+      });
   }
 }
+
+shareBtn.addEventListener("click", partage);
+
+
 
 // Fonction pour ajouter un topic
 function AddTopics() {

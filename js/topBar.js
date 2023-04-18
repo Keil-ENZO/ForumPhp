@@ -6,7 +6,6 @@ const cardInfo = document.getElementById("cardInfo");
 const compte = document.getElementById("compte");
 const btnClose = document.querySelector(".close");
 
-
 // Fait apparaitre les informations du compte
 compte.addEventListener("click", () => {
   console.log("Click");
@@ -23,9 +22,7 @@ btnClose.addEventListener("click", () => {
   compte.style.transform = "translateX(0)";
 });
 
-
-
-
+// Dark mode
 mode.addEventListener("click", () => {
   body.classList.toggle("dark");
   cardInfo.classList.toggle("dark");
@@ -36,11 +33,32 @@ mode.addEventListener("click", () => {
   }
 });
 
-
-
 function searchHandler() {
   iconSearch.replaceWith(search);
   search.style.width = "100%";
   search.style.opacity = "1";
   search.focus();
 }
+
+//Permet de ce deconnecter
+document.addEventListener("DOMContentLoaded", () => {
+  const btnDeconnexion = document.getElementById("deconnexion");
+  btnDeconnexion.addEventListener("click", () => {
+    fetch(`http://localhost:8888/ForumPhp/Api/deconnexion.php`, {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Déconnexion réussie
+          console.log(data.message);
+          window.location.href =
+            "http://localhost:8888/ForumPhp/pages/connexion.php";
+        } else {
+          // Erreur de déconnexion
+          console.error(data.message);
+        }
+      })
+      .catch((error) => console.error(error));
+  });
+});

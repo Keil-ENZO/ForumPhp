@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!$_SESSION['pseudo']) {
+    header('Location: connexion.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,22 +28,22 @@
     <nav>
         <div class="topbar" data-aos="fade-down" data-aos-delay="400">
             <div>
-               <h2 id="compte" class="compte">F</h2>
+                <h2 id="compte" class="compte"><?php echo ucfirst($_SESSION['pseudo'][0])?></h2>
             </div>
             <div id="cardInfo" class="card-info">
                 <div class="parametre">
                     <a href="#"><img class="close" src="../Assets/img/closeWhite.svg" alt="btn close">
                     </a>
                     <a href="#" class="mode"><img id="moon" src="../Assets/img/moon.svg" alt=""></a>
-
                 </div>
-                <p><strong>Email:</strong> <br> forum@gmail.com</p>
-                <p><strong>Nom utilisateur:</strong> <br> forum</p>
-                <input type="button" class="btn" value="Se Deconnecter">
+
+                <p><strong>Email:</strong> <br><?php echo $_SESSION['email']?></p>
+                <p><strong>Pseudo:</strong> <br><?php echo $_SESSION['pseudo']?></p>
+                <input type="submit" id="deconnexion" class="btn" value="Se Deconnecter">
             </div>
-            
+
             <div><a href="../index.html"><img class="logo2" src="../Assets/img/logo.png" alt="Logo Forum"></a></div>
-            
+
             <div class="search">
                 <input id="search" type="search" class="input" placeholder="Recherche">
                 <img id="iconSearch" onclick="searchHandler()" class="icon" src="../Assets/img/search.svg" alt="">
@@ -58,15 +66,15 @@
             </div>
 
             <div class="content">
-                <div class="share" data-aos="flip-right" data-aos-offset="200"
-                data-aos-delay="50"
-                data-aos-duration="1000"
-                data-aos-easing="ease-in-out">
+                <div class="share" data-aos="flip-right" data-aos-offset="200" data-aos-delay="50"
+                    data-aos-duration="1000" data-aos-easing="ease-in-out">
                     <textarea placeholder="Que voulez vous dire ?" class="inputShare" id="textArea"></textarea>
-                    <input onclick="partage()" type="submit" value="Partager" id="shareBtn" class="btn">
+                    <!-- Btn de partage -->
+                    <input type="submit" value="Partager" id="shareBtn" class="btn">
                 </div>
                 <div class="message" id="message"></div>
             </div>
+
             <div class="menuTopic" data-aos="fade-up-right" data-aos-delay="300">
                 <ul id="topic">
                     <li>
@@ -83,8 +91,8 @@
     <script src="../js/topBar.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
-      </script>
+    AOS.init();
+    </script>
 
 </body>
 
