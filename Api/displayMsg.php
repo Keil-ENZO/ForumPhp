@@ -20,7 +20,7 @@ try {
 }
 
 
-$requete = $pdo->prepare("SELECT * FROM `Users`");
+$requete = $pdo->prepare("SELECT * FROM `Messages`");
 $requete->execute();
 
 
@@ -29,7 +29,7 @@ $result = $requete->fetchAll();
 $retour["success"] = true;
 $retour["message"] = "Voici les données";
 $retour["Nb lignes"] = count($result);
-$retour["Users"] = $result;
+$retour["Messages"] = $result;
 
 echo json_encode($retour);
  

@@ -19,20 +19,30 @@ try {
 }
 
 // Vérification du message et du pseudo de l'utilisateur connecté
+// Vérification du message et du pseudo de l'utilisateur connecté
 if (!empty($_GET["message"]) && !empty($_SESSION['pseudo'])) {
   
-        $requete = $pdo->prepare("INSERT INTO `Messages` (`id`,`message`,`user_id`,`pseudo`) VALUES (NULL, :message, :user_id, :pseudo);");
-        $requete->bindParam(":message", $_GET["message"]);
-        $requete->bindParam(":user_id", $_SESSION['id']);
-        $pseudo = substr($_SESSION['pseudo'], 0, 1);
-        $requete->bindParam(":pseudo", $pseudo);
-        
+    $requete = $pdo->prepare("INSERT INTO `Messages` (`id`,`message`,`user_id`,`pseudo`) VALUES (NULL, :message, :user_id, :pseudo);");
+    $requete->bindParam(":message", $_GET["message"]);
+    $requete->bindParam(":user_id", $_SESSION['id']);
+    $pseudo = strtoupper(substr($_SESSION['pseudo'], 0, 1));
+    $requete->bindParam(":pseudo", $pseudo);
 
-        $requete->execute();
+    $requete->execute();
 
-        $retour["success"] = true;
-        $retour["message"] = "Message envoyé";
-        $retour["results"] = array();
+    $message_id = $pdo->lastInsertId(); 
+
+    $message = array(
+        "id" => $message_id,
+        "message" => $_GET["message"],
+        "user_id" => $_SESSION['id'],
+        "pseudo" => $pseudo,
+        "created_at" => date('Y-m-d H:i:s') 
+    );
+
+    $retour["success"] = true;
+    $retour["message"] = "Message envoyé";
+    $retour["results"] = $message;
 } else {
     $retour["success"] = false;
     $retour["message"] = "Erreur : Veuillez remplir tous les champs";
