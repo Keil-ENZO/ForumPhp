@@ -19,7 +19,6 @@ try {
 }
 
 // Vérification du message et du pseudo de l'utilisateur connecté
-// Vérification du message et du pseudo de l'utilisateur connecté
 if (!empty($_GET["message"]) && !empty($_SESSION['pseudo'])) {
   
     $requete = $pdo->prepare("INSERT INTO `Messages` (`id`,`message`,`user_id`,`pseudo`) VALUES (NULL, :message, :user_id, :pseudo);");

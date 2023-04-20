@@ -61,7 +61,6 @@ if(!$_SESSION['pseudo']) {
                         <h3>#Tags</h3> <img src="../Assets/img/add.svg" onclick="AddTags()" class="add" id="addTopics"
                             alt="">
                     </li>
-                    </li>
                 </ul>
             </div>
 
@@ -90,6 +89,7 @@ if(!$_SESSION['pseudo']) {
     <script src="../js/main.js"></script>
     <script src="../js/topBar.js"></script>
     <script src="../js/partage.js"></script>
+    <script src="../js/ajoutTags.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
     AOS.init();

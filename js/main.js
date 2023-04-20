@@ -3,7 +3,7 @@ const message = document.getElementById("message");
 
 // Fonction pour afficher les messages
 function displayMsg() {
-  fetch(`http://localhost:8888/ForumPhp/Api/displayMsg.php`)
+  fetch(`http://localhost:8888/ForumPhp/Api/Display/displayMsg.php`)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -35,9 +35,6 @@ function displayMsg() {
 }
 
 displayMsg();
-
-
-
 
 // Fonction pour ajouter un topic
 function AddTopics() {
@@ -75,37 +72,26 @@ function AddTopics() {
 }
 
 // Fonction pour ajouter un tag
-function AddTags() {
-  const tags = document.getElementById("tags");
-  const li = document.createElement("li");
-  const a = document.createElement("a");
-  a.setAttribute("href", "#");
-  a.textContent = "Entrer votre tag";
-
-  const inputHandler = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Entrer votre tag");
-    input.setAttribute("class", "inputTag");
-    input.setAttribute("autofocus", "true");
-    input.setAttribute("maxlength", "20");
-    input.setAttribute("value", "#");
-    a.replaceWith(input);
-
-    const enterHandler = (e) => {
-      if (e.key === "Enter") {
-        const newTag = input.value;
-        input.replaceWith(a);
-        a.textContent = newTag;
-        input.removeEventListener("keypress", enterHandler);
-        a.removeEventListener("click", inputHandler);
+function displayTags() {
+  const tagsList = document.getElementById("tags");
+  fetch("http://localhost:8888/ForumPhp/Api/Display/displayTags.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const tags = data.Topics;
+        tagsList.innerHTML = "";
+        tags.forEach((tag) => {
+          const li = document.createElement("li");
+          li.textContent = tag.tag;
+          tagsList.appendChild(li);
+        });
+      } else {
+        console.error(`Erreur : ${data.message}`);
       }
-    };
-    input.addEventListener("keypress", enterHandler);
-    a.removeEventListener("click", inputHandler);
-  };
-  a.addEventListener("click", inputHandler);
-
-  li.appendChild(a);
-  tags.appendChild(li);
+    })
+    .catch((error) => {
+      console.error(`Erreur : ${error}`);
+    });
 }
+
+displayTags();
