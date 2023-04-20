@@ -37,61 +37,55 @@ function displayMsg() {
 displayMsg();
 
 // Fonction pour ajouter un topic
-function AddTopics() {
-  const topic = document.getElementById("topic");
-  const li = document.createElement("li");
-  const a = document.createElement("a");
-  a.setAttribute("href", "#");
-  a.textContent = "Entrer votre topic";
-
-  const inputHandler = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Entrer votre topic");
-    input.setAttribute("class", "inputTopic");
-    input.setAttribute("autofocus", "true");
-    input.setAttribute("maxlength", "20");
-    a.replaceWith(input);
-
-    const enterHandler = (e) => {
-      if (e.key === "Enter") {
-        const newTopic = input.value;
-        input.replaceWith(a);
-        a.textContent = newTopic;
-        input.removeEventListener("keypress", enterHandler);
-        a.removeEventListener("click", inputHandler);
-      }
-    };
-    input.addEventListener("keypress", enterHandler);
-    a.removeEventListener("click", inputHandler);
-  };
-  a.addEventListener("click", inputHandler);
-
-  li.appendChild(a);
-  topic.appendChild(li);
-}
-
-// Fonction pour ajouter un tag
-function displayTags() {
-  const tagsList = document.getElementById("tags");
-  fetch("http://localhost:8888/ForumPhp/Api/Display/displayTags.php")
+const displayTopics = (tagId) => {
+  fetch(
+    `http://localhost:8888/ForumPhp/Api/Display/displayTopics.php?tag_id=${tagId}`
+  )
     .then((response) => response.json())
     .then((data) => {
-      if (data.success) {
-        const tags = data.Topics;
-        tagsList.innerHTML = "";
-        tags.forEach((tag) => {
+      const topics = data.results;
+      const topicsList = document.getElementById("topics-list");
+      topicsList.innerHTML = ""; // Efface la liste des topics actuels
+      if (topics.length > 0) {
+        for (let i = 0; i < topics.length; i++) {
+          const topic = topics[i];
           const li = document.createElement("li");
-          li.textContent = tag.tag;
-          tagsList.appendChild(li);
-        });
+          const a = document.createElement("a");
+          a.setAttribute("href", `topic.php?id=${topic.id}`);
+          a.textContent = topic.topic;
+          li.appendChild(a);
+          topicsList.appendChild(li);
+        }
       } else {
-        console.error(`Erreur : ${data.message}`);
+        const li = document.createElement("li");
+        li.textContent = "Aucun sujet de discussion pour ce tag.";
+        topicsList.appendChild(li);
       }
     })
-    .catch((error) => {
-      console.error(`Erreur : ${error}`);
-    });
-}
+    .catch((error) => console.error(error));
+};
+
+displayTopics();
+
+// Fonction pour Afficher les Tags
+const displayTags = () => {
+  fetch(`http://localhost:8888/ForumPhp/Api/Display/displayTags.php`)
+    .then((response) => response.json())
+    .then((data) => {
+      const tags = data.results;
+      for (let i = 0; i < tags.length; i++) {
+        const tag = tags[i];
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.setAttribute("href", "#");
+        a.textContent = tag.tag;
+        a.setAttribute("data-tag-id", tag.id);
+        li.appendChild(a);
+        tagsList.appendChild(li);
+      }
+      addClickHandlerToTags();
+    })
+    .catch((error) => console.error(error));
+};
 
 displayTags();
