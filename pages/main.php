@@ -58,11 +58,14 @@ if(!$_SESSION['pseudo']) {
             <div class="menuTag" data-aos="fade-up-left" data-aos-delay="300">
                 <ul id="tags">
                     <li>
-                        <h3>#Tags</h3> <img src="../Assets/img/add.svg" onclick="AddTags()" class="add" id="addTopics"
-                            alt="">
+                        <h3>#Tags</h3>
+                        <img src="../Assets/img/add.svg" onclick="AddTags()" class="add" id="addTags" alt="">
+                        <ul id="tagList"></ul>
                     </li>
                 </ul>
             </div>
+
+
 
             <div class="content">
                 <div class="share" data-aos="flip-right" data-aos-offset="200" data-aos-delay="50"
@@ -73,6 +76,7 @@ if(!$_SESSION['pseudo']) {
                 </div>
                 <div class="message" id="message"></div>
             </div>
+
 
             <div class="menuTopic" data-aos="fade-up-right" data-aos-delay="300">
                 <ul id="topic">
@@ -90,9 +94,14 @@ if(!$_SESSION['pseudo']) {
     <script src="../js/topBar.js"></script>
     <script src="../js/partage.js"></script>
     <script src="../js/ajoutTags.js"></script>
+    <script src="../js/ajoutTopics.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
     AOS.init();
+    </script>
+
+    <script>
+
     </script>
 
 </body>

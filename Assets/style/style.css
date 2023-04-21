@@ -70,6 +70,10 @@ textarea {
   fill: #3E4454;
 }
 
+.selected {
+  color: red;
+}
+
 @media screen and (max-width: 1000px) {
   .modal {
     position: absolute;
@@ -407,6 +411,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: "text", sans-serif;
 }
 .menuTag .inputTag {
   width: 80%;

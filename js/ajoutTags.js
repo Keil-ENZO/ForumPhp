@@ -1,15 +1,15 @@
-// Fonction pour ajouter un tag
 function AddTags() {
   const tags = document.getElementById("tags");
   const li = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
-  a.textContent = "Entrer votre tag";
+  a.setAttribute("class", "tag");
+  a.textContent = "Enter your tag";
 
   const inputHandler = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Entrer votre tag");
+    input.setAttribute("placeholder", "Enter your tag");
     input.setAttribute("class", "inputTag");
     input.setAttribute("autofocus", "true");
     input.setAttribute("maxlength", "20");
@@ -27,13 +27,19 @@ function AddTags() {
           method: "POST",
         })
           .then((response) => response.json())
-          .then((data) => console.log(data))
+          .then((data) => {
+            const tagId = data.results.id;
+            a.setAttribute("data-id", tagId);
+            console.log(data);
+          })
           .catch((error) => console.error(error));
       }
     };
+
     input.addEventListener("keypress", enterHandler);
     a.removeEventListener("click", inputHandler);
   };
+
   a.addEventListener("click", inputHandler);
 
   li.appendChild(a);
