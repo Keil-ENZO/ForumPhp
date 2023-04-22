@@ -29,6 +29,6 @@ $result = $requete->fetchAll();
 $retour["success"] = true;
 $retour["message"] = "Voici les données";
 $retour["Nb lignes"] = count($result);
-$retour["Tags"] = $result;
+$retour["results"] = $result;
 
 echo json_encode($retour);

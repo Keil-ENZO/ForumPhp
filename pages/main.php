@@ -81,10 +81,12 @@ if(!$_SESSION['pseudo']) {
             <div class="menuTopic" data-aos="fade-up-right" data-aos-delay="300">
                 <ul id="topic">
                     <li>
-                        <h3>Topics</h3><img src="../Assets/img/add.svg" onclick="AddTopics()" class="add" id="addTopics"
-                            alt="">
+                        <h3>Topics</h3>
+                        <img src="../Assets/img/add.svg" onclick="AddTopics()" class="add" id="addTopics" alt="">
                     </li>
                 </ul>
+
+                <ul id="topics"></ul>
             </div>
 
         </div>

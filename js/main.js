@@ -66,26 +66,3 @@ displayMsg();
 // };
 
 // displayTopics();
-
-// // Fonction pour Afficher les Tags
-// const displayTags = () => {
-//   fetch(`http://localhost:8888/ForumPhp/Api/Display/displayTags.php`)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const tags = data.results;
-//       for (let i = 0; i < tags.length; i++) {
-//         const tag = tags[i];
-//         const li = document.createElement("li");
-//         const a = document.createElement("a");
-//         a.setAttribute("href", "#");
-//         a.textContent = tag.tag;
-//         a.setAttribute("data-tag-id", tag.id);
-//         li.appendChild(a);
-//         tagsList.appendChild(li);
-//       }
-//       addClickHandlerToTags();
-//     })
-//     .catch((error) => console.error(error));
-// };
-
-// displayTags();

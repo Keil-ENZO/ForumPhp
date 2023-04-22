@@ -1,3 +1,24 @@
+function displayTags() {
+  const tagsList = document.getElementById("tags");
+
+  fetch("http://localhost:8888/ForumPhp/Api/Display/displayTags.php")
+    .then((response) => response.json())
+    .then((data) => {
+      data.results.forEach((tag) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.setAttribute("href", "#");
+        a.setAttribute("class", "tag");
+        a.setAttribute("data-id", tag.id);
+        a.textContent = tag.tag;
+        li.appendChild(a);
+        tagsList.appendChild(li);
+      });
+    })
+    .catch((error) => console.error(error));
+}
+
+displayTags();
 function AddTags() {
   const tags = document.getElementById("tags");
   const li = document.createElement("li");
@@ -5,6 +26,7 @@ function AddTags() {
   a.setAttribute("href", "#");
   a.setAttribute("class", "tag");
   a.textContent = "Enter your tag";
+  a.setAttribute("data-id", ""); // ajout du data-id
 
   const inputHandler = () => {
     const input = document.createElement("input");
@@ -29,7 +51,7 @@ function AddTags() {
           .then((response) => response.json())
           .then((data) => {
             const tagId = data.results.id;
-            a.setAttribute("data-id", tagId);
+            a.setAttribute("data-id", tagId); // mise à jour du data-id
             console.log(data);
           })
           .catch((error) => console.error(error));
