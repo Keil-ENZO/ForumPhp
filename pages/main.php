@@ -86,6 +86,7 @@ if(!$_SESSION['pseudo']) {
                     </li>
                 </ul>
             </div>
+
         </div>
 
     </main>
