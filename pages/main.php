@@ -71,10 +71,9 @@ if(!$_SESSION['pseudo']) {
                 <div class="share" data-aos="flip-right" data-aos-offset="200" data-aos-delay="50"
                     data-aos-duration="1000" data-aos-easing="ease-in-out">
                     <textarea placeholder="Que voulez vous dire ?" class="inputShare" id="textArea"></textarea>
-                    <!-- Btn de partage -->
                     <input type="submit" value="Partager" id="shareBtn" class="btn">
                 </div>
-                <div class="message" id="message"></div>
+                <div class="message" id="message" data-id="id_du_sujet"></div>
             </div>
 
 
@@ -95,7 +94,7 @@ if(!$_SESSION['pseudo']) {
 
     <script src="../js/main.js"></script>
     <script src="../js/topBar.js"></script>
-    <script src="../js/partage.js"></script>
+    <script src="../js/message.js"></script>
     <script src="../js/ajoutTags.js"></script>
     <script src="../js/ajoutTopics.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -20,8 +20,14 @@ try {
 }
 
 
-$requete = $pdo->prepare("SELECT * FROM `Messages`");
-$requete->execute();
+if(isset($_GET['topic_id'])) {
+    $tag_id = $_GET['topic_id'];
+    $requete = $pdo->prepare("SELECT * FROM `Messages` WHERE topic_id = ?");
+    $requete->execute([$topic_id]);
+} else {
+    $requete = $pdo->prepare("SELECT * FROM `Messages`");
+    $requete->execute();
+}
 
 
 $result = $requete->fetchAll();

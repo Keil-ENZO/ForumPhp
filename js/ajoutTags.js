@@ -19,19 +19,21 @@ function displayTags() {
 }
 
 displayTags();
+
+
 function AddTags() {
   const tags = document.getElementById("tags");
   const li = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
   a.setAttribute("class", "tag");
-  a.textContent = "Enter your tag";
+  a.textContent = "Nouveau tag";
   a.setAttribute("data-id", ""); // ajout du data-id
 
   const inputHandler = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Enter your tag");
+    input.setAttribute("placeholder", "Nouveau tag");
     input.setAttribute("class", "inputTag");
     input.setAttribute("autofocus", "true");
     input.setAttribute("maxlength", "20");
@@ -67,3 +69,4 @@ function AddTags() {
   li.appendChild(a);
   tags.appendChild(li);
 }
+

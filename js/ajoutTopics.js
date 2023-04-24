@@ -10,9 +10,9 @@ function displayTopicsByTagId(tagId) {
       data.results.forEach((topic) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.setAttribute("href", `topic.php?id=${topic.id}`);
         a.textContent = topic.topic;
-        li.setAttribute("data-id", tagId);
+        li.setAttribute("data-id", topic.id);
+        li.setAttribute("class", "topic");
         li.appendChild(a);
         topicsList.appendChild(li);
       });
@@ -34,7 +34,6 @@ function AddTopics() {
   const li = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
-  a.setAttribute("data-id", "");
   a.textContent = "Secltionner un tag";
 
   let tag_id = ""; // Initialize tag_id to an empty string
@@ -77,6 +76,8 @@ function AddTopics() {
         )
           .then((response) => response.json())
           .then((data) => {
+            const topicId = data.results.id;
+            a.setAttribute("data-id", topicId);
             console.log(data);
           })
           .catch((error) => console.error(error));

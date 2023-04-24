@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 session_start();
 
-
 // Connexion à la base de données
 $db_host = 'localhost';
 $db_user = 'root';
@@ -18,14 +17,21 @@ try {
     $retour["message"] = "Erreur de connexion à la base de données";
 }
 
-// Vérification du message et du pseudo de l'utilisateur connecté
-if (!empty($_GET["message"]) && !empty($_SESSION['pseudo'])) {
+// Vérification du message et du topic_id
+if (!empty($_GET["message"]) && !empty($_GET['topic_id'])) {
   
-    $requete = $pdo->prepare("INSERT INTO `Messages` (`id`,`message`,`user_id`,`pseudo`) VALUES (NULL, :message, :user_id, :pseudo);");
+    // Récupération de l'ID utilisateur et du pseudo depuis la session
+    $user_id = $_SESSION['id'];
+    $pseudo = $_SESSION['pseudo'];
+
+    $requete = $pdo->prepare("INSERT INTO `Messages` (`id`, `message`, `user_id`, `pseudo`, `topic_id`, `date_envoi`) VALUES (NULL, :message, :user_id, :pseudo, :topic_id, :date_envoi);");
     $requete->bindParam(":message", $_GET["message"]);
-    $requete->bindParam(":user_id", $_SESSION['id']);
-    $pseudo = strtoupper(substr($_SESSION['pseudo'], 0, 1));
+    $requete->bindParam(":user_id", $user_id);
+    $pseudo = strtoupper(substr($pseudo, 0, 1));
     $requete->bindParam(":pseudo", $pseudo);
+    $requete->bindParam(":topic_id", $_GET['topic_id']);
+    $date_envoi = date('Y-m-d H:i:s');
+    $requete->bindParam(":date_envoi", $date_envoi);
 
     $requete->execute();
 
@@ -34,9 +40,10 @@ if (!empty($_GET["message"]) && !empty($_SESSION['pseudo'])) {
     $message = array(
         "id" => $message_id,
         "message" => $_GET["message"],
-        "user_id" => $_SESSION['id'],
+        "user_id" => $user_id,
         "pseudo" => $pseudo,
-        "created_at" => date('Y-m-d H:i:s') 
+        "topic_id" => $_GET['topic_id'],
+        "date_envoi" => $date_envoi
     );
 
     $retour["success"] = true;
