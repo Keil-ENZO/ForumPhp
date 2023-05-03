@@ -82,5 +82,23 @@ textarea {
 }
 
 .selected {
-    color: red;
+    border-radius: 5px;
+    padding: 10px;
+    color: $cards;
+    background-color: $colorPrincipal;
+    border: 2px solid $color;
+    filter: drop-shadow(4px  4px rgb(0, 0, 0));
+}
+
+.selected2 {
+    border-radius: 5px;
+    padding: 10px;
+    color: $cards;
+    background-color: $colorPrincipal;
+    border: 2px solid $color;
+    filter: drop-shadow(4px  4px rgb(0, 0, 0));
+
+    a {
+        color: $cards;
+    }
 }

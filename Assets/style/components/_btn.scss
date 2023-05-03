@@ -9,8 +9,11 @@
     font-family: 'Comfortaa', cursive;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    border: 2px solid $color;
+    filter: drop-shadow(4px  4px rgb(0, 0, 0));
 
     &:hover {
         background-color: $color;
+        filter: drop-shadow(-4px  -4px $colorPrincipal);
     }
 }

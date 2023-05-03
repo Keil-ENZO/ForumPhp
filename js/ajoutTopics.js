@@ -5,7 +5,6 @@ function displayTopicsByTagId(tagId) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      // Afficher les résultats ici
       topicsList.innerHTML = "";
       data.results.forEach((topic) => {
         const li = document.createElement("li");
@@ -26,6 +25,12 @@ tagsContainer.addEventListener("click", (event) => {
   if (tag) {
     const tagId = tag.dataset.id;
     displayTopicsByTagId(tagId);
+    // Ajouter la classe "selected" au tag sélectionné
+    const selectedTag = document.querySelector(".selected");
+    if (selectedTag) {
+      selectedTag.classList.remove("selected");
+    }
+    tag.classList.add("selected");
   }
 });
 
@@ -34,7 +39,7 @@ function AddTopics() {
   const li = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
-  a.textContent = "Secltionner un tag";
+  a.textContent = "Sélectionner un tag";
 
   let tag_id = ""; // Initialize tag_id to an empty string
 
@@ -96,7 +101,7 @@ function AddTopics() {
   tags.forEach((tag) => {
     tag.addEventListener("click", selectTag);
   });
-  // Ajoutez ceci après avoir attaché les écouteurs d'événements aux tags
+  // Ajouter ceci après avoir attaché les écouteurs d'événements aux tags
   const defaultTag = document.querySelector(".tag");
   selectTag.call(defaultTag);
 }

@@ -9,7 +9,7 @@ function displayMessagesByTopicId(topicId) {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        const messages = data.Messages;
+        const messages = data.Messages.reverse(); // Inverser l'ordre des messages
         const messagesContainer = document.getElementById("message");
         messagesContainer.innerHTML = "";
 
@@ -44,42 +44,21 @@ function displayMessagesByTopicId(topicId) {
 }
 
 function formatDate(date) {
-  const daysOfWeek = [
-    "Dimanche",
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi",
-  ];
-  const monthsOfYear = [
-    "janvier",
-    "février",
-    "mars",
-    "avril",
-    "mai",
-    "juin",
-    "juillet",
-    "août",
-    "septembre",
-    "octobre",
-    "novembre",
-    "décembre",
-  ];
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  };
 
-  const dayOfWeek = daysOfWeek[date.getDay()];
-  const dayOfMonth = date.getDate();
-  const monthOfYear = monthsOfYear[date.getMonth()];
-  const year = date.getFullYear();
-  const hour = date.getHours().toString().padStart(2, "0");
-  const minute = date.getMinutes().toString().padStart(2, "0");
-
-  return `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year} - ${hour}:${minute}`;
+  return date.toLocaleString(undefined, options);
 }
 
-// Déclarez la variable currentTopicId en tant que variable globale
-let currentTopicId;
+let currentTopicId; // Déclarez la variable currentTopicId en tant que variable globale
+
 window.addEventListener("load", function () {
   function getMessages() {
     const text = textArea.value;
@@ -97,6 +76,12 @@ window.addEventListener("load", function () {
         displayMessagesByTopicId(currentTopicId);
         console.log(currentTopicId);
         // Vous pouvez ensuite utiliser la variable currentTopicId pour envoyer les messages à ce sujet
+        // Ajouter la classe "selected" au topic sélectionné
+        const selectedTopic = document.querySelector(".selected2");
+        if (selectedTopic) {
+          selectedTopic.classList.remove("selected2");
+        }
+        topic.classList.add("selected2");
       });
     });
 
@@ -112,7 +97,11 @@ window.addEventListener("load", function () {
     const topicId = currentTopicId;
 
     fetch(
-      `http://localhost:8888/ForumPhp/Api/msg.php?message=${message}&user_id=${userId}&pseudo=${pseudo}&topic_id=${topicId}`,
+      `http://localhost:8888/ForumPhp/Api/msg.php?message=${encodeURIComponent(
+        message
+      )}&user_id=${userId}&pseudo=${encodeURIComponent(
+        pseudo
+      )}&topic_id=${topicId}`,
       {
         method: "POST",
       }
@@ -126,20 +115,32 @@ window.addEventListener("load", function () {
 
           const messages = document.querySelector("#message");
           if (!messages) {
-            console.log("L'élément avec l'ID 'messages' n'a pas été trouvé.");
+            console.log("L'élément avec l'ID 'message' n'a pas été trouvé.");
             return;
           }
 
           messages.insertAdjacentHTML(
             "afterbegin",
             `
-    <div class="card">
-      <p class="author">${pseudo}</p>
-      <p>${text}</p>
-      <p class="date">${dateNow}</p>
-    </div>
-  `
+            <div class="card">
+              <p class="author">${pseudo}</p>
+              <p>${text}</p>
+              <p class="date">${dateNow}</p>
+            </div>
+          `
           );
+
+          // Ajouter la classe "selected" au topic sélectionné
+          const selectedTopic = document.querySelector(".selected2");
+          if (selectedTopic) {
+            selectedTopic.classList.remove("selected2");
+          }
+          const currentTopic = document.querySelector(
+            `.topic[data-id="${topicId}"]`
+          );
+          if (currentTopic) {
+            currentTopic.classList.add("selected2");
+          }
         } else {
           console.log(data.message);
         }
@@ -148,9 +149,5 @@ window.addEventListener("load", function () {
         console.log("Une erreur est survenue : " + error);
       });
   }
-
   shareBtn.addEventListener("click", getMessages);
-});
-
-
-
+});    

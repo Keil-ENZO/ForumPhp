@@ -5,6 +5,7 @@ const body = document.querySelector("body");
 const cardInfo = document.getElementById("cardInfo");
 const compte = document.getElementById("compte");
 const btnClose = document.querySelector(".close");
+const topbar = document.querySelector(".topbar");
 
 // Fait apparaitre les informations du compte
 compte.addEventListener("click", () => {
@@ -25,7 +26,6 @@ btnClose.addEventListener("click", () => {
 // Dark mode
 mode.addEventListener("click", () => {
   body.classList.toggle("dark");
-  cardInfo.classList.toggle("dark");
   if (body.classList.contains("dark")) {
     mode.innerHTML = '<img id="iconMode" src="../Assets/img/sun.svg" alt="">';
   } else {

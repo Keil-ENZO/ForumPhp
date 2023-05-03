@@ -3,8 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  background-color: $cards;
-  border-bottom: 1px solid #3e445427;
+  background-color: $background;
+  border: 2px solid $color;
+  filter: drop-shadow(0px  4px rgb(0, 0, 0));
+  
 
   .icon {
     padding: 10px;
@@ -32,6 +34,7 @@
       background: $colorPrincipal;
       color: $cards;
       outline: none;
+
 
       &::placeholder {
         color: $cards;
@@ -64,6 +67,7 @@
   cursor: pointer;
   transition: 0.4s ease-in-out;
   transition-delay: 0.2s;
+
 }
 
 .card-info {
@@ -81,6 +85,8 @@
   transition: 0.4s ease-in-out;
   transform: translateX(-150%);
   z-index: 999;
+  border: 2px solid $color;
+  filter: drop-shadow(4px  4px rgb(0, 0, 0));
 
   p {
     color: $cards;

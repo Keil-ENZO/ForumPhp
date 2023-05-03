@@ -19,23 +19,20 @@ try {
 
 // Vérification du message et du topic_id
 if (!empty($_GET["message"]) && !empty($_GET['topic_id'])) {
-  
     // Récupération de l'ID utilisateur et du pseudo depuis la session
     $user_id = $_SESSION['id'];
     $pseudo = $_SESSION['pseudo'];
 
-    $requete = $pdo->prepare("INSERT INTO `Messages` (`id`, `message`, `user_id`, `pseudo`, `topic_id`, `date_envoi`) VALUES (NULL, :message, :user_id, :pseudo, :topic_id, :date_envoi);");
+    $requete = $pdo->prepare("INSERT INTO `Messages` (`id`, `message`, `user_id`, `pseudo`, `topic_id`, `date_envoi`) VALUES (NULL, :message, :user_id, :pseudo, :topic_id, NOW());");
     $requete->bindParam(":message", $_GET["message"]);
     $requete->bindParam(":user_id", $user_id);
     $pseudo = strtoupper(substr($pseudo, 0, 1));
     $requete->bindParam(":pseudo", $pseudo);
     $requete->bindParam(":topic_id", $_GET['topic_id']);
-    $date_envoi = date('Y-m-d H:i:s');
-    $requete->bindParam(":date_envoi", $date_envoi);
 
     $requete->execute();
 
-    $message_id = $pdo->lastInsertId(); 
+    $message_id = $pdo->lastInsertId();
 
     $message = array(
         "id" => $message_id,
@@ -43,7 +40,7 @@ if (!empty($_GET["message"]) && !empty($_GET['topic_id'])) {
         "user_id" => $user_id,
         "pseudo" => $pseudo,
         "topic_id" => $_GET['topic_id'],
-        "date_envoi" => $date_envoi
+        "date_envoi" => date('Y-m-d H:i:s')
     );
 
     $retour["success"] = true;

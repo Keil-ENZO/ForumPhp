@@ -37,12 +37,14 @@ if(!$_SESSION['pseudo']) {
                     <a href="#" class="mode"><img id="moon" src="../Assets/img/moon.svg" alt=""></a>
                 </div>
 
-                <p><strong>Email:</strong> <br><?php echo $_SESSION['email']?></p>
-                <p><strong>Pseudo:</strong> <br><?php echo $_SESSION['pseudo']?></p>
-                <input type="submit" id="deconnexion" class="btn" value="Se Deconnecter">
+                <div class="infoCompte">
+                    <p><strong>Email:</strong> <br><?php echo $_SESSION['email']?></p>
+                    <p><strong>Pseudo:</strong> <br><?php echo $_SESSION['pseudo']?></p>
+                    <input type="submit" id="deconnexion" class="btn" value="Se Deconnecter">
+                </div>
             </div>
 
-            <div><a href="../index.html"><img class="logo2" src="../Assets/img/logo.png" alt="Logo Forum"></a></div>
+            <div><a href="../index.php"><img class="logo2" src="../Assets/img/logo.png" alt="Logo Forum"></a></div>
 
             <div class="search">
                 <input id="search" type="search" class="input" placeholder="Recherche">
