@@ -20,15 +20,14 @@ try {
 }
 
 
-if(isset($_GET['topic_id'])) {
-    $tag_id = $_GET['topic_id'];
-    $requete = $pdo->prepare("SELECT * FROM `Messages` WHERE topic_id = ?");
+if (isset($_GET['topic_id'])) {
+    $topic_id = $_GET['topic_id'];
+    $requete = $pdo->prepare("SELECT * FROM Messages WHERE topic_id = ?");
     $requete->execute([$topic_id]);
 } else {
-    $requete = $pdo->prepare("SELECT * FROM `Messages`");
+    $requete = $pdo->prepare("SELECT * FROM Messages");
     $requete->execute();
 }
-
 
 $result = $requete->fetchAll();
 
@@ -38,4 +37,4 @@ $retour["Nb lignes"] = count($result);
 $retour["Messages"] = $result;
 
 echo json_encode($retour);
- 
+?>

@@ -2,6 +2,47 @@ const textArea = document.getElementById("textArea");
 const messageContainer = document.getElementById("message");
 const shareBtn = document.getElementById("shareBtn");
 
+function displayMessagesByTopicId(topicId) {
+  fetch(
+    `http://localhost:8888/ForumPhp/Api/Display/displayMsg.php?topic_id=${topicId}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const messages = data.Messages;
+        const messagesContainer = document.getElementById("message");
+        messagesContainer.innerHTML = "";
+
+        messages.forEach((message) => {
+          const messageCard = document.createElement("div");
+          messageCard.classList.add("card");
+
+          const author = document.createElement("p");
+          author.classList.add("author");
+          author.textContent = message.pseudo;
+
+          const content = document.createElement("p");
+          content.textContent = message.message;
+
+          const dateElement = document.createElement("p");
+          dateElement.classList.add("date");
+          dateElement.textContent = message.date_envoi;
+
+          messageCard.appendChild(author);
+          messageCard.appendChild(content);
+          messageCard.appendChild(dateElement);
+
+          messagesContainer.appendChild(messageCard);
+        });
+      } else {
+        console.log(data.message);
+      }
+    })
+    .catch((error) => {
+      console.log("Une erreur est survenue : " + error);
+    });
+}
+
 function formatDate(date) {
   const daysOfWeek = [
     "Dimanche",
@@ -53,6 +94,7 @@ window.addEventListener("load", function () {
     topics.forEach((topic) => {
       topic.addEventListener("click", () => {
         currentTopicId = topic.getAttribute("data-id");
+        displayMessagesByTopicId(currentTopicId);
         console.log(currentTopicId);
         // Vous pouvez ensuite utiliser la variable currentTopicId pour envoyer les messages à ce sujet
       });
@@ -109,3 +151,6 @@ window.addEventListener("load", function () {
 
   shareBtn.addEventListener("click", getMessages);
 });
+
+
+
