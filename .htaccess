@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Rediriger /Conversation vers main.php
+RewriteRule ^Conversation$ main.php [L]
+
+# Rediriger /inscription vers inscription.php
+RewriteRule ^inscription$ inscription.php [L]
+
+# Rediriger /connexion vers connexion.php
+RewriteRule ^connexion$ connexion.php [L]

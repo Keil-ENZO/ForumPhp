@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("email").value = "";
             document.getElementById("mdp").value = "";
             window.location.href =
-              "http://localhost:8888/ForumPhp/pages/main.php";
+              "http://localhost:8888/ForumPhp/pages/Conversation";
           } else {
             message.innerHTML = data.message;
           }

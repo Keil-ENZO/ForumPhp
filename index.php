@@ -12,5 +12,9 @@
     <h2>coucou</h2>
 
 </body>
+<script>
+window.location.href = "http://localhost:8888/ForumPhp/pages/inscription.php";
+</script>
+
 
 </html>
