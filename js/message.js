@@ -57,7 +57,7 @@ function formatDate(date) {
   return date.toLocaleString(undefined, options);
 }
 
-let currentTopicId; // Déclarez la variable currentTopicId en tant que variable globale
+let currentTopicId;
 
 window.addEventListener("load", function () {
   function getMessages() {
@@ -75,8 +75,6 @@ window.addEventListener("load", function () {
         currentTopicId = topic.getAttribute("data-id");
         displayMessagesByTopicId(currentTopicId);
         console.log(currentTopicId);
-        // Vous pouvez ensuite utiliser la variable currentTopicId pour envoyer les messages à ce sujet
-        // Ajouter la classe "selected" au topic sélectionné
         const selectedTopic = document.querySelector(".selected2");
         if (selectedTopic) {
           selectedTopic.classList.remove("selected2");
@@ -86,7 +84,6 @@ window.addEventListener("load", function () {
     });
 
     if (!currentTopicId) {
-      // Si aucun sujet n'est sélectionné, affichez un message d'erreur
       alert("Veuillez sélectionner un sujet avant d'envoyer un message.");
       return;
     }
@@ -130,7 +127,6 @@ window.addEventListener("load", function () {
           `
           );
 
-          // Ajouter la classe "selected" au topic sélectionné
           const selectedTopic = document.querySelector(".selected2");
           if (selectedTopic) {
             selectedTopic.classList.remove("selected2");

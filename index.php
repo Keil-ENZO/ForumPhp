@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <h2>coucou</h2>
-
+    <h1>Forum</h1>
 </body>
 <script>
 window.location.href = "http://localhost:8888/ForumPhp/pages/inscription.php";
